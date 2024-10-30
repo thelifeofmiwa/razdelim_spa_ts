@@ -1,12 +1,10 @@
 <template>
   <div>
-    <PersonsPage></PersonsPage>
+    1234
   </div>
 </template>
 
 <script setup lang="ts">
-import PersonsPage from '@/components/PersonsPage'
-const store = use
 
 </script>
 
