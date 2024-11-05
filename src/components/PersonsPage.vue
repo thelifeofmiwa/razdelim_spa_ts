@@ -4,24 +4,26 @@
 	<div v-for="person in persons" :key="person.name">
 		<div>{{ person.name }}</div>
 	</div>
-	<button @click="formVisible = true">+</button>
+	<ProjectButton @click="formVisible = true" v-if="formVisible === false">+</ProjectButton>
 	<div v-if="formVisible === true">
-		<input type="text" v-model="newPersonName" />
-		<button @click="addPersonAndClearInput">Добавить</button>
+		<ProjectInput v-model="newPersonName" label="Введите имя" placeholder="Иван"></ProjectInput> 
+		<ProjectButton @click="addPersonAndClearInput">Добавить</ProjectButton>
 	</div>
 </template>
 
 <script setup lang="ts">
-import { usePersons } from "@/composables/usePersons";
+// import { usePersons } from "@/composables/usePersons";
 import usePersonsAndProductsStore, {
 	type IPerson,
 } from "@/stores/usePersonsAndProductsStore";
 import { computed, ref, type Ref } from "vue";
+import ProjectButton from "./UI/ProjectButton.vue";
+import ProjectInput from "./UI/ProjectInput.vue";
 
 const store = usePersonsAndProductsStore();
 const persons = computed(() => usePersonsAndProductsStore().persons);
 
-// const { formVisible, newPersonName, addPersonAndClearInput } = usePersons(store);
+// const { formVisible, newPersonName, addPersonAndClearInput } = usePersons(store); понять почему не работает хук
 
 let formVisible: Ref<boolean> = ref(false);
 const newPersonName = ref<string>('');
