@@ -16,7 +16,7 @@ import { usePersons } from "@/composables/usePersons";
 import usePersonsAndProductsStore, {
 	type IPerson,
 } from "@/stores/usePersonsAndProductsStore";
-import { computed, ref, type ModelRef, type Ref } from "vue";
+import { computed, ref, type Ref } from "vue";
 
 const store = usePersonsAndProductsStore();
 const persons = computed(() => usePersonsAndProductsStore().persons);
@@ -24,7 +24,7 @@ const persons = computed(() => usePersonsAndProductsStore().persons);
 // const { formVisible, newPersonName, addPersonAndClearInput } = usePersons(store);
 
 let formVisible: Ref<boolean> = ref(false);
-const newPersonName: any = defineModel("");
+const newPersonName = ref<string>('');
 
 function addPersonAndClearInput() {
 	const person: IPerson = {
