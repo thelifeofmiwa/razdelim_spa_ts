@@ -1,12 +1,13 @@
 <template>
   <div>
-    1234
+    123
     <PersonsPage></PersonsPage>
   </div>
 </template>
 
 <script setup lang="ts">
-import PersonsPage from './components/PersonsPage'
+import PersonsPage from './components/PersonsPage.vue'
+
 </script>
 
 <style scoped>
