@@ -21,10 +21,10 @@ import { computed, ref, type ModelRef, type Ref } from "vue";
 const store = usePersonsAndProductsStore();
 const persons = computed(() => usePersonsAndProductsStore().persons);
 
-// const { formVisible, newPersonName, addPersonAndClearInput } = usePersons();
+// const { formVisible, newPersonName, addPersonAndClearInput } = usePersons(store);
 
 let formVisible: Ref<boolean> = ref(false);
-const newPersonName: ModelRef<string> = defineModel("");
+const newPersonName: any = defineModel("");
 
 function addPersonAndClearInput() {
 	const person: IPerson = {
