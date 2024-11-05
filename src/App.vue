@@ -10,6 +10,6 @@ import PersonsPage from './components/PersonsPage.vue'
 
 </script>
 
-<style scoped>
+<style lang="scss">
 
 </style>
