@@ -1,27 +1,31 @@
-import type { IPerson } from "@/stores/usePersonsAndProductsStore";
-import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
-import type { Store } from "pinia";
-import { ref, type ModelRef, type Ref } from "vue";
+import usePersonsAndProductsStore, {
+	type IPerson,
+} from "@/stores/usePersonsAndProductsStore";
+import { computed, ref, type Ref } from "vue";
 
+export function usePersons() {
+	const store = usePersonsAndProductsStore();
+	const persons = computed(() => usePersonsAndProductsStore().persons);
 
-export function usePersons(store: any){
-    let formVisible: Ref<boolean> = ref(false);
-    const newPersonName: any = defineModel("");
+	const formVisible = ref<boolean>(false);
+	const newPersonName: any = defineModel("");
 
-    function addPersonAndClearInput() {
-        const person: IPerson = {
-            name: newPersonName.value,
-            count: 0,
-            selectedProducts: [],
-        };
-        store.addNewPerson(person);
-        newPersonName.value = "";
-        formVisible.value = false;
-    }
+	function addPersonAndClearInput() {
+		const person: IPerson = {
+			name: newPersonName.value,
+			count: 0,
+			selectedProducts: [],
+		};
+		store.addNewPerson(person);
+		newPersonName.value = "";
+		formVisible.value = false;
+	}
 
-    return {
+	return {
+        store,
+		persons,
         formVisible,
         newPersonName,
-        addPersonAndClearInput
-    }
+        addPersonAndClearInput,
+	};
 }
