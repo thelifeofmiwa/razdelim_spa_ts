@@ -1,17 +1,6 @@
 import { defineStore } from "pinia";
-
-export interface IPerson {
-    name: string,
-    count: number,
-    selectedProducts: string[]
-}
-
-export interface IProduct {
-    name: string,
-    price: number,
-    selectedBy: string[],
-    paidBy: string | null
-}
+import type { IPerson } from "@/interfaces/interface";
+import type { IProduct } from "@/interfaces/interface";
 
 const usePersonsAndProductsStore = defineStore('persons', {
     state: () => ({
