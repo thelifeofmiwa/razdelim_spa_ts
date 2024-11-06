@@ -1,14 +1,14 @@
 import usePersonsAndProductsStore, {
 	type IPerson,
 } from "@/stores/usePersonsAndProductsStore";
-import { computed, ref, type Ref } from "vue";
+import { computed, ref} from "vue";
 
 export function usePersons() {
 	const store = usePersonsAndProductsStore();
 	const persons = computed(() => usePersonsAndProductsStore().persons);
 
 	const formVisible = ref<boolean>(false);
-	const newPersonName: any = defineModel("");
+	const newPersonName = ref<string>('');
 
 	function addPersonAndClearInput() {
 		const person: IPerson = {
@@ -22,7 +22,6 @@ export function usePersons() {
 	}
 
 	return {
-        store,
 		persons,
         formVisible,
         newPersonName,
