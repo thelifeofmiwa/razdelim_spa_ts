@@ -26,7 +26,7 @@
 			placeholder="700"
 		/>
 		<ProjectButton @click="addNewProductAndClearInput"
-			>+</ProjectButton
+			>Добавить</ProjectButton
 		>
 	</div>
 </template>
