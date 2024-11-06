@@ -1,9 +1,7 @@
 <template>
     <h1>Персоны</h1>
     <h2>Нажмите на плюсик, чтобы добавить новую персону</h2>
-    <div v-for="person in persons" :key="person.name">
-        <div>{{ person.name }}</div>
-    </div>
+	<PersonList :personsArray="persons"/>
     <ProjectButton @click="formVisible = true" v-if="formVisible === false"
         >+</ProjectButton
     >
@@ -21,6 +19,7 @@
 import { usePersons } from "@/composables/usePersons";
 import ProjectButton from "./UI/ProjectButton.vue";
 import ProjectInput from "./UI/ProjectInput.vue";
+import PersonList from "./PersonList.vue";
 
 const { persons, formVisible, newPersonName, addPersonAndClearInput } =
     usePersons();
