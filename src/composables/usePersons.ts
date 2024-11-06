@@ -1,6 +1,5 @@
-import usePersonsAndProductsStore, {
-	type IPerson,
-} from "@/stores/usePersonsAndProductsStore";
+import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
+import type { IPerson } from "@/interfaces/interface";
 import { computed, ref} from "vue";
 
 export function usePersons() {

@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import type { IPerson } from '@/stores/usePersonsAndProductsStore';
+import type { IPerson } from '@/interfaces/interface';
 
 const props = defineProps<{
     personsArray: IPerson[]
