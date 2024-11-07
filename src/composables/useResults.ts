@@ -7,30 +7,77 @@ export function useResults() {
 	const persons = computed(() => store.persons);
 	const products = computed(() => store.products);
 
-	function findPersonCount(products: IProduct[]) {
-		// Мапа для хранения долгов
-		const debts: { [name: string]: number } = {};
+	const result = computed(() =>
+		findPersonsCount(persons.value, products.value)
+	);
 
-		// Обрабатываем каждый продукт
+	function findPersonsCount(persons: IPerson[], products: IProduct[]) {
+		persons.forEach((person) => {
+			person.count = 0;
+		});
 		products.forEach((product) => {
-			const { name, price, selectedBy, paidBy } = product;
-
-			// Рассчитываем долю каждого, кто выбрал продукт
-			const share = price / selectedBy.length;
-
-			// Перебираем людей, которые выбрали продукт
-			selectedBy.forEach((person) => {
-				if (person !== paidBy) {
-					// Этот человек должен выплатить свою долю за продукт
-					debts[person] -= share; // Он должен эту сумму
-				}
-			});
-
-			// Человек, который оплатил продукт, получает деньги
-			debts[paidBy] += price; // Он получил всю сумму
+			if (product.selectedBy.length > 0) {
+				const share = Number(
+					(
+						product.price /
+						product.selectedBy.length
+					).toFixed(2)
+				);
+				product.selectedBy.forEach((selectedBy) => {
+					const person = persons.find(
+						(p) => p.name === selectedBy
+					);
+					if (person) {
+						if (
+							!product.paidBy.includes(
+								person.name
+							)
+						) {
+							person.count += share;
+						}
+					}
+				});
+			}
 		});
 
-		// Возвращаем итоговые долги
-		return debts;
+		return persons;
 	}
+
+	return {
+		result,
+	};
 }
+
+// // Теперь учитываем взаимные долги
+// const debtMap: { [key: string]: number } = {};
+// // Заполняем карту долгов
+// persons.forEach((person) => {
+// 	debtMap[person.name] = person.count; // Сохраняем текущие долги
+// });
+// // Учтем взаимные долги
+// const finalDebts: { [key: string]: number } = {};
+// for (const personName in debtMap) {
+// 	const debt = debtMap[personName];
+// 	if (!finalDebts[personName]) {
+// 		finalDebts[personName] = 0; // Инициализируем финальный долг
+// 	}
+// 	persons.forEach((otherPerson) => {
+// 		if (
+// 			otherPerson.name !== personName &&
+// 			debtMap[otherPerson.name] > 0
+// 		) {
+// 			const mutualDebt = Math.min(
+// 				debt,
+// 				debtMap[otherPerson.name]
+// 			);
+// 			finalDebts[personName] += mutualDebt; // Увеличиваем финальный долг
+// 			debtMap[personName] -= mutualDebt; // Уменьшаем долг
+// 			debtMap[otherPerson.name] -= mutualDebt; // Уменьшаем долг
+// 		}
+// 	});
+// }
+// // Обновляем поле count для каждого человека
+// persons.forEach((person) => {
+// 	person.count = finalDebts[person.name] || 0; // Обновляем финальные долги
+// });
+// // Теперь можно вывести обновленные долги
