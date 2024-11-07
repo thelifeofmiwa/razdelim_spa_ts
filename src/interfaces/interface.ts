@@ -8,5 +8,5 @@ export interface IProduct {
     name: string,
     price: number,
     selectedBy: string[],
-    paidBy: string | null
+    paidBy: string 
 }
