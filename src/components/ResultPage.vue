@@ -1,12 +1,11 @@
 <template>
 	<h1>Итоги</h1>
-	<div v-for="person in result" :key="person.name">
-		{{ person.name }} - {{ person.count }}
-	</div>
+	<PersonList :persons-array="result" />
 </template>
 
 <script setup lang="ts">
 import { useResults } from "@/composables/useResults";
+import PersonList from "./PersonList.vue";
 
 const { result } = useResults();
 </script>

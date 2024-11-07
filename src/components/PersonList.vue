@@ -1,6 +1,6 @@
 <template>
     <div v-for="person in props.personsArray" :key="person.name">
-        {{ person.name }}
+        {{ person.name }} - {{ person.count }}
     </div>
 </template>
 
