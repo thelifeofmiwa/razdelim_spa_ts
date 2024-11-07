@@ -1,19 +1,21 @@
 <template>
     <v-select
     variant="solo"
-    :items="itemsProp"
+    width="400"
+    :items="props.itemsProp"
     >
 
     </v-select>
 </template>
 
 <script setup lang="ts">
-const props = defineProps({
-    itemsProp: {
-        type: Array,
-        required: true
-    }
-})
+
+
+
+const props = defineProps<{
+    itemsProp: string[]
+}>();
+
 </script>
 
 <style scoped>

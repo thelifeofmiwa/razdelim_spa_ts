@@ -2,6 +2,10 @@
 	<h1>Продукты</h1>
 	<h2>Добавьте продукты, цену которых нужно разделить</h2>
 	<div v-for="product in products" :key="product.name">
+		<ProjectSelect
+			v-model="product.paidBy"
+			:itemsProp="arrayToString(persons)"
+		></ProjectSelect>
 		{{ product.name }} - {{ product.price }}
 		<div v-for="person in persons" :key="person.name">
 			<ProjectButton @click="selectProduct(person, product)">
@@ -34,6 +38,7 @@
 <script setup lang="ts">
 import ProjectButton from "./UI/ProjectButton.vue";
 import ProjectInput from "./UI/ProjectInput.vue";
+import ProjectSelect from "./UI/ProjectSelect.vue";
 import { useProducts } from "@/composables/useProducts";
 
 const {
@@ -44,6 +49,7 @@ const {
 	formVisible,
 	addNewProductAndClearInput,
 	selectProduct,
+	arrayToString,
 } = useProducts();
 </script>
 

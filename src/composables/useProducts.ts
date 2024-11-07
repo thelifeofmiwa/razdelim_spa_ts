@@ -29,6 +29,10 @@ export function useProducts() {
         product.selectedBy.push(person.name);
     }
 
+    function arrayToString(personsArray: IPerson[]){
+        return personsArray.map((person)=> person.name)
+    }
+
     return {
         persons,
         products,
@@ -37,5 +41,6 @@ export function useProducts() {
         formVisible,
         addNewProductAndClearInput,
         selectProduct,
+        arrayToString
     };
 }
