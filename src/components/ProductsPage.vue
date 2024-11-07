@@ -1,14 +1,14 @@
 <template>
 	<h1>Продукты</h1>
 	<h2>Добавьте продукты, цену которых нужно разделить</h2>
-	<div v-for="product in products" :key="product.name">
+	<div v-for="product in products" :key="product.name"> <!--С помощью директивы v-for интерируемся по массиву products-->
 		<ProjectSelect
 			v-model="product.paidBy"
 			:itemsProp="arrayToString(persons)"
-		></ProjectSelect>
+		></ProjectSelect> <!--С помощью v-model связываем значение селекта и поля продукта paidBy; так же передаём в селект массив имён из массива products-->
 		{{ product.name }} - {{ product.price }}
 		<div v-for="person in persons" :key="person.name">
-			<ProjectButton @click="selectProduct(person, product)">
+			<ProjectButton @click="selectProduct(person, product)"> <!--Используем метод selectProduct для записи имени продукта и покупателя в сооответствующие поля массивов-->
 				{{ person.name }}
 			</ProjectButton>
 		</div>
@@ -16,7 +16,7 @@
 
 	<ProjectButton @click="formVisible = true" v-if="formVisible === false"
 		>+</ProjectButton
-	>
+	> 
 
 	<div v-if="formVisible === true">
 		<ProjectInput
