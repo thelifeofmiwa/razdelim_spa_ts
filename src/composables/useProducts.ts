@@ -16,7 +16,7 @@ export function useProducts() {
             name: productName.value,
             price: Number(productPrice.value),
             selectedBy: [],
-            paidBy: null,
+            paidBy: '',
         };
         store.addNewProduct(newProduct);
         productName.value = "";
