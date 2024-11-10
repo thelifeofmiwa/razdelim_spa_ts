@@ -16,14 +16,39 @@
                 </p>
             </div>
             <div class="button">
-                <ProjectButton @click="$router.push('/persons')">Начать!</ProjectButton>
+                <ProjectButton @click="$router.push('/persons')"
+                    >Начать!</ProjectButton
+                >
             </div>
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import ProjectButton from '@/components/UI/ProjectButton.vue';
+import ProjectButton from "@/components/UI/ProjectButton.vue";
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+#start {
+    height: 100vh;
+    background-color: rgb(201, 223, 223);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .header {
+        text-align: center;
+    }
+    .description {
+        margin-top: 15px;
+        width: 600px;
+        height: 100px;
+        text-align: justify;
+    }
+    .button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+</style>
