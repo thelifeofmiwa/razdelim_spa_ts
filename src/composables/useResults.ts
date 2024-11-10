@@ -7,48 +7,31 @@ export function useResults() {
     const persons = computed(() => store.persons);
     const products = computed(() => store.products);
 
-    const result = computed(() =>
-        findPersonsCount(persons.value, products.value)
+    const debts = computed(() =>
+        consolidateDebts(
+            calculateDebts(persons.value, products.value).map((person) => ({
+                ...person,
+                debts: person.debts.map((debt) => ({
+                    ...debt,
+                    amount: parseFloat(debt.amount.toFixed(2)),
+                })),
+            }))
+        )
     );
-
-    const debts = computed(() => calculateDebts(persons.value, products.value));
-
-    function findPersonsCount(persons: IPerson[], products: IProduct[]) {
-        persons.forEach((person) => {
-            person.count = 0;
-        });
-        products.forEach((product) => {
-            if (product.selectedBy.length > 0) {
-                const share = Number(
-                    (product.price / product.selectedBy.length).toFixed(2)
-                );
-                product.selectedBy.forEach((selectedBy) => {
-                    const person = persons.find((p) => p.name === selectedBy);
-                    if (person) {
-                        if (!product.paidBy.includes(person.name)) {
-                            person.count += share;
-                        }
-                    }
-                });
-            }
-        });
-
-        return persons;
-    }
 
     function addDebt(
         person: IPerson,
-        toPersonName: string,
+        personName: string,
         amount: number
     ): void {
         if (!person.debts) person.debts = [];
         const existingDebt = person.debts.find(
-            (d) => d.personName === toPersonName
+            (d) => d.personName === personName
         );
         if (existingDebt) {
             existingDebt.amount += amount;
         } else {
-            person.debts.push({ personName: toPersonName, amount });
+            person.debts.push({ personName: personName, amount });
         }
     }
 
@@ -79,8 +62,51 @@ export function useResults() {
         return persons;
     }
 
+    function consolidateDebts(persons: IPerson[]): IPerson[] {
+        persons.forEach((person) => {
+            if (!person.debts) return;
+
+            person.debts.forEach((debt) => {
+                // Находим того, кому человек должен
+                const creditor = persons.find(
+                    (p) => p.name === debt.personName
+                );
+                if (!creditor || !creditor.debts) return;
+
+                // Проверяем, есть ли встречный долг от этого человека
+                const reciprocalDebt = creditor.debts.find(
+                    (d) => d.personName === person.name
+                );
+                if (reciprocalDebt) {
+                    if (debt.amount > reciprocalDebt.amount) {
+                        // Если долг `person` больше, уменьшаем его и обнуляем встречный
+                        debt.amount -= reciprocalDebt.amount;
+                        creditor.debts = creditor.debts.filter(
+                            (d) => d.personName !== person.name
+                        );
+                    } else if (debt.amount < reciprocalDebt.amount) {
+                        // Если долг `creditor` больше, уменьшаем его и обнуляем `debt`
+                        reciprocalDebt.amount -= debt.amount;
+                        person.debts = person.debts.filter(
+                            (d) => d.personName !== creditor.name
+                        );
+                    } else {
+                        // Если долги равны, обнуляем оба
+                        person.debts = person.debts.filter(
+                            (d) => d.personName !== creditor.name
+                        );
+                        creditor.debts = creditor.debts.filter(
+                            (d) => d.personName !== person.name
+                        );
+                    }
+                }
+            });
+        });
+
+        return persons;
+    }
+
     return {
-        result,
         debts,
     };
 }
