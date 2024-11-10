@@ -14,6 +14,7 @@ export function usePersons() {
 			name: newPersonName.value,
 			count: 0,
 			selectedProducts: [],
+			debts: []
 		};
 		store.addNewPerson(person); //используем метод хранилища
 		newPersonName.value = ""; //обнуляем значение реактивной переменной 
