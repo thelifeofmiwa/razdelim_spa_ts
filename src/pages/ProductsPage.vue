@@ -36,9 +36,9 @@
 </template>
 
 <script setup lang="ts">
-import ProjectButton from "./UI/ProjectButton.vue";
-import ProjectInput from "./UI/ProjectInput.vue";
-import ProjectSelect from "./UI/ProjectSelect.vue";
+import ProjectButton from "@/components/UI/ProjectButton.vue";
+import ProjectInput from "@/components/UI/ProjectInput.vue";
+import ProjectSelect from "@/components/UI/ProjectSelect.vue";
 import { useProducts } from "@/composables/useProducts";
 
 const {

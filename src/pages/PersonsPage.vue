@@ -17,9 +17,9 @@
 
 <script setup lang="ts">
 import { usePersons } from "@/composables/usePersons";
-import ProjectButton from "./UI/ProjectButton.vue";
-import ProjectInput from "./UI/ProjectInput.vue";
-import PersonList from "./PersonList.vue";
+import ProjectButton from "@/components/UI/ProjectButton.vue";
+import ProjectInput from "@/components/UI/ProjectInput.vue";
+import PersonList from "@/components/PersonList.vue";
 
 const { persons, formVisible, newPersonName, addPersonAndClearInput } =
     usePersons(); //деструктуризируем объект, возвращаемый composable-функцией usePersons
