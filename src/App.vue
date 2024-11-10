@@ -1,15 +1,18 @@
 <template>
   <div>
-    <PersonsPage />
-    <ProductsPage style="margin-top: 20px;"></ProductsPage>
-    <ResultPage style="margin-top: 20px;" />
+    <!-- <nav>
+      <router-link to="/">Persons</router-link>
+      <router-link to="/products">Products</router-link>
+      <router-link to="/result">Result</router-link>
+    </nav> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script setup lang="ts">
-import PersonsPage from './components/PersonsPage.vue'
-import ProductsPage from './components/ProductsPage.vue';
-import ResultPage from './components/ResultPage.vue'
+import PersonsPage from './pages/PersonsPage.vue'
+import ProductsPage from './pages/ProductsPage.vue';
+import ResultPage from './pages/ResultPage.vue'
 
 </script>
 
