@@ -29,7 +29,7 @@ export function useProducts() {
         product.selectedBy.push(person.name);
     }
 
-    function arrayToString(personsArray: IPerson[]){ // создаём метод для преобразования массива persons в массив строк из поля объекта
+    function arrayToString(personsArray: IPerson[]){ // создаём метод для преобразования массива persons в массив строк из поля name объекта
         return personsArray.map((person)=> person.name)
     }
 
