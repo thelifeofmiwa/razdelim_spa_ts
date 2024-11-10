@@ -2,7 +2,7 @@ export interface IPerson {
     name: string;
     count: number;
     selectedProducts: string[];
-    debts?: IDebt[];
+    debts: IDebt[];
 }
 
 export interface IProduct {
