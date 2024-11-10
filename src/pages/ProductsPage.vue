@@ -33,6 +33,7 @@
 			>Добавить</ProjectButton
 		>
 	</div>
+	<ProjectButton @click="$router.push('/result')">К результатам!</ProjectButton>
 </template>
 
 <script setup lang="ts">

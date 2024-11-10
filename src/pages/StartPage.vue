@@ -16,7 +16,7 @@
                 </p>
             </div>
             <div class="button">
-                <ProjectButton @click="$router.push('/persons')">Начать</ProjectButton>
+                <ProjectButton @click="$router.push('/persons')">Начать!</ProjectButton>
             </div>
         </div>
     </div>

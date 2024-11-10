@@ -13,6 +13,7 @@
         ></ProjectInput>
         <ProjectButton @click="addPersonAndClearInput">Добавить</ProjectButton><!--Так же импортируем кнопку и при клике добавляем новую персону в массив persons-->
     </div>
+    <ProjectButton @click="$router.push('/products')">Продолжить</ProjectButton>
 </template>
 
 <script setup lang="ts">

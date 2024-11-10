@@ -28,9 +28,11 @@
             </div>
         </div>
     </div>
+    <ProjectButton @click="$router.push('/persons')">Посчитать снова!</ProjectButton>
 </template>
 
 <script setup lang="ts">
+import ProjectButton from "@/components/UI/ProjectButton.vue";
 import { useResults } from "@/composables/useResults";
 
 const { debts } = useResults();
