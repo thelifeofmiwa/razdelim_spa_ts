@@ -1,6 +1,7 @@
 import type { IPerson, IProduct, IDebt } from "@/interfaces/interface";
 import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 
 export function useResults() {
     const store = usePersonsAndProductsStore();
@@ -8,6 +9,8 @@ export function useResults() {
     const products = computed(() => store.products);
 
     const formVisible = ref<boolean>(false);
+
+    const router = useRouter();
 
     const debts = computed(() =>
         consolidateDebts(
@@ -27,6 +30,11 @@ export function useResults() {
         } else {
             formVisible.value = true;
         }
+    }
+
+    function countAgain() {
+        router.push({ path: "/persons" });
+        store.$reset();
     }
 
     function addDebt(
@@ -119,6 +127,7 @@ export function useResults() {
     return {
         debts,
         formVisible,
-        showAndHide
+        showAndHide,
+        countAgain,
     };
 }

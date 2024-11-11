@@ -37,7 +37,7 @@
                 </div>
             </div>
         </div>
-        <ProjectButton class="button" @click="$router.push('/persons'); store.$reset()"
+        <ProjectButton class="button" @click="countAgain"
             >Посчитать снова!</ProjectButton
         >
     </div>
@@ -46,10 +46,8 @@
 <script setup lang="ts">
 import ProjectButton from "@/components/UI/ProjectButton.vue";
 import { useResults } from "@/composables/useResults";
-import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
 
-const store = usePersonsAndProductsStore();
-const { debts,formVisible, showAndHide } = useResults();
+const { debts,formVisible, showAndHide, countAgain } = useResults();
 
 </script>
 
