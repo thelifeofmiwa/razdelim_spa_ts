@@ -20,7 +20,7 @@
                 >Добавить</ProjectButton
             ><!--Так же импортируем кнопку и при клике добавляем новую персону в массив persons-->
         </div>
-        <ProjectButton class="button" @click="$router.push('/products')"
+        <ProjectButton class="button" @click="goToNextPage"
             >Продолжить</ProjectButton
         >
     </div>
@@ -32,7 +32,7 @@ import ProjectButton from "@/components/UI/ProjectButton.vue";
 import ProjectInput from "@/components/UI/ProjectInput.vue";
 import PersonList from "@/components/PersonList.vue";
 
-const { persons, formVisible, newPersonName, addPersonAndClearInput } =
+const { persons, formVisible, newPersonName, addPersonAndClearInput, goToNextPage } =
     usePersons(); //деструктуризируем объект, возвращаемый composable-функцией usePersons
 </script>
 

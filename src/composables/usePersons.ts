@@ -1,6 +1,7 @@
 import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
 import type { IPerson } from "@/interfaces/interface";
 import { computed, ref} from "vue";
+import { useRouter } from "vue-router";
 
 export function usePersons() {
 	const store = usePersonsAndProductsStore();	//инициализируем хранилище usePersonsAndProducts
@@ -8,6 +9,8 @@ export function usePersons() {
 
 	const formVisible = ref<boolean>(false); //реактивная переменная, отвечающая за видимость формы добавления персон
 	const newPersonName = ref<string>(''); //реактивная переменная, связанная с инпутом в форме
+
+	const router = useRouter(); // переменная для работы с Vue Router
 
 	function addPersonAndClearInput() {  //модифицированный метод хранилица addNewPerson
 		if(newPersonName.value){ // проверка на пустую строку в инпуте newPersonName
@@ -25,10 +28,20 @@ export function usePersons() {
 		}
 	}
 
+
+function goToNextPage(){
+    if(persons.value.length > 0){
+        router.push({path: '/products'})
+    } else{
+        alert('Добавьте хотя бы одну персону')
+    }
+}
+
 	return {	//возвращаем из функции все необходимые для компонента данные
 		persons,
         formVisible,
         newPersonName,
         addPersonAndClearInput,
+		goToNextPage
 	};
 }
