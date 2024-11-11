@@ -2,21 +2,8 @@
     <div id="products__page">
         <h1>Продукты</h1>
         <h2>Добавьте продукты, цену которых нужно разделить</h2>
-        <div class="products" v-for="product in products" :key="product.name">
-            <!--С помощью директивы v-for итерируемся по массиву products-->
-            <ProjectSelect
-                v-model="product.paidBy"
-                :itemsProp="arrayToString(persons)"
-            ></ProjectSelect>
-            <!--С помощью v-model связываем значение селекта и поля продукта paidBy; так же передаём в селект массив имён из массива products-->
-            {{ product.name }} - {{ product.price }}
-            <div class="payers" v-for="person in persons" :key="person.name">
-                <ProjectButton @click="selectProduct(person, product)">
-                    <!--Используем метод selectProduct для записи имени продукта и покупателя в сооответствующие поля массивов-->
-                    {{ person.name }}
-                </ProjectButton>
-            </div>
-        </div>
+
+        <ProductList :persons="persons" :products="products" />
 
         <ProjectButton
             class="add"
@@ -25,7 +12,7 @@
             >+</ProjectButton
         >
 
-        <div v-if="formVisible === true">
+        <div class="add_product" v-if="formVisible === true">
             <ProjectInput
                 v-model="productName"
                 label="Введите название продукта"
@@ -36,9 +23,7 @@
                 label="Введите цену продукта"
                 placeholder="700"
             />
-            <ProjectButton
-                class="add_product"
-                @click="addNewProductAndClearInput"
+            <ProjectButton class="add" @click="addNewProductAndClearInput"
                 >Добавить</ProjectButton
             >
         </div>
@@ -49,9 +34,9 @@
 </template>
 
 <script setup lang="ts">
+import ProductList from "@/components/ProductList.vue";
 import ProjectButton from "@/components/UI/ProjectButton.vue";
 import ProjectInput from "@/components/UI/ProjectInput.vue";
-import ProjectSelect from "@/components/UI/ProjectSelect.vue";
 import { useProducts } from "@/composables/useProducts";
 
 const {
@@ -61,8 +46,6 @@ const {
     productPrice,
     formVisible,
     addNewProductAndClearInput,
-    selectProduct,
-    arrayToString,
 } = useProducts();
 </script>
 
@@ -89,8 +72,8 @@ const {
     .payers {
         margin-top: 10px;
     }
-	.next{
-		margin-top: 10px;
-	}
+    .next {
+        margin-top: 10px;
+    }
 }
 </style>
