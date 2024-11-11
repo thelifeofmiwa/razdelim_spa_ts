@@ -27,7 +27,7 @@
                 >Добавить</ProjectButton
             >
         </div>
-        <ProjectButton class="next" @click="$router.push('/result')"
+        <ProjectButton class="next" @click="goToNextPage"
             >К результатам!</ProjectButton
         >
     </div>
@@ -46,6 +46,7 @@ const {
     productPrice,
     formVisible,
     addNewProductAndClearInput,
+    goToNextPage
 } = useProducts();
 </script>
 
