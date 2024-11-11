@@ -31,6 +31,8 @@ const props = defineProps<{
 }>();
 
 const { arrayToString, selectProduct } = useProducts();
+
+//дtкомпозированный список продуктов; используется на странице PersonsPage
 </script>
 
 <style scoped lang="scss">

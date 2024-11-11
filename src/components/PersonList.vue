@@ -16,6 +16,8 @@ import type { IPerson } from "@/interfaces/interface";
 const props = defineProps<{
     personsArray: IPerson[];
 }>();
+
+//декомпозированный список персон; используется на странице PersonsPage
 </script>
 
 <style scoped lang="scss">

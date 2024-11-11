@@ -10,13 +10,11 @@
 </template>
 
 <script setup lang="ts">
-
-
-
 const props = defineProps<{
     itemsProp: string[]
 }>();
 
+//компонент представляет собой выпадющий список из ui-библиотеки Vuetify
 </script>
 
 <style scoped>

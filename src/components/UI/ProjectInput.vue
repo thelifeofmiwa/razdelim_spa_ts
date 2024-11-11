@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+//компонент представляет собой инпут из ui-библиотеки Vuetify
 </script>
 
 <style scoped></style>

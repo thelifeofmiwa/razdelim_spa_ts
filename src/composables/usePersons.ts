@@ -29,7 +29,7 @@ export function usePersons() {
 	}
 
 
-function goToNextPage(){
+function goToNextPage(){ // метод для работы с роутером
     if(persons.value.length > 0){
         router.push({path: '/products'})
     } else{

@@ -4,6 +4,7 @@
         <h2>Добавьте продукты, цену которых нужно разделить</h2>
 
         <ProductList :persons="persons" :products="products" />
+        <!--Импортируем компонент списка персон и пропсом передаём массив persons-->
 
         <ProjectButton
             class="add"
@@ -11,8 +12,10 @@
             v-if="formVisible === false"
             >+</ProjectButton
         >
+        <!--Кнопка для открытия формы добавления нового продукта-->
 
         <div class="add_product" v-if="formVisible === true">
+            <!--Форма для добавления нового продукта-->
             <ProjectInput
                 v-model="productName"
                 label="Введите название продукта"
@@ -27,7 +30,7 @@
                 >Добавить</ProjectButton
             >
         </div>
-        <ProjectButton class="next" @click="goToNextPage"
+        <ProjectButton class="next" @click="goToNextPage" 
             >К результатам!</ProjectButton
         >
     </div>
@@ -46,8 +49,8 @@ const {
     productPrice,
     formVisible,
     addNewProductAndClearInput,
-    goToNextPage
-} = useProducts();
+    goToNextPage,
+} = useProducts(); //деструктуризируем данные, возвращаемые композабл-функцией useProducts
 </script>
 
 <style scoped lang="scss">
@@ -69,9 +72,6 @@ const {
     }
     .add_product {
         margin-top: 20px;
-    }
-    .payers {
-        margin-top: 10px;
     }
     .next {
         margin-top: 10px;

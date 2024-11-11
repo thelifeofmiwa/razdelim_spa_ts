@@ -4,15 +4,15 @@ import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
 
 export function useResults() {
-    const store = usePersonsAndProductsStore();
-    const persons = computed(() => store.persons);
+    const store = usePersonsAndProductsStore(); // инициализируем хранилище
+    const persons = computed(() => store.persons); //инициализируем массивы persons и products
     const products = computed(() => store.products);
 
-    const formVisible = ref<boolean>(false);
+    const formVisible = ref<boolean>(false); //реактивная переменная, отвечающая за видимость формы конкретизации долгов
 
-    const router = useRouter();
+    const router = useRouter(); // переменная для работы с Vue Router
 
-    const debts = computed(() =>
+    const debts = computed(() => // переменная с посчитанными данными долгов, округлёнными до 2 чисел после запятой
         consolidateDebts(
             calculateDebts(persons.value, products.value).map((person) => ({
                 ...person,
@@ -24,7 +24,7 @@ export function useResults() {
         )
     );
 
-    function showAndHide() {
+    function showAndHide() { // метод для отображения подробностей долга
         if (formVisible.value) {
             formVisible.value = false;
         } else {
@@ -32,18 +32,17 @@ export function useResults() {
         }
     }
 
-    function countAgain() {
+    function countAgain() { // метод для работы с роутером ; возвращает на страницу persons и очищает хранилище
         router.push({ path: "/persons" });
         store.$reset();
     }
 
-    function addDebt(
+    function addDebt( // метод для добавления долга
         person: IPerson,
         personName: string,
         amount: number
     ): void {
-        if (!person.debts) person.debts = [];
-        const existingDebt = person.debts.find(
+        const existingDebt = person.debts.find( //проверка на наличие долга перед человеком; если долга нет - создаётся новый объект, если есть - суммируется со старым
             (d) => d.personName === personName
         );
         if (existingDebt) {
@@ -53,16 +52,16 @@ export function useResults() {
         }
     }
 
-    function calculateDebts(persons: IPerson[], products: IProduct[]) {
-        persons.forEach((person) => (person.debts = []));
+    function calculateDebts(persons: IPerson[], products: IProduct[]) { //первичный рассчёт долгов персон
+        persons.forEach((person) => (person.debts = [])); //обнуление поля debts у персон
 
         products.forEach((product) => {
             if (product.selectedBy.length === 0) return;
 
-            const share = Number(
+            const share = Number( //расчёт доли каждого "евшего"
                 (product.price / product.selectedBy.length).toFixed(2)
             );
-            const payer = persons.find(
+            const payer = persons.find( // проверка на оплату
                 (person) => person.name === product.paidBy
             );
             if (!payer) return;
@@ -70,7 +69,7 @@ export function useResults() {
             product.selectedBy.forEach((selectedBy) => {
                 if (selectedBy === product.paidBy) return;
 
-                const person = persons.find((p) => p.name === selectedBy);
+                const person = persons.find((p) => p.name === selectedBy); //запись долга
                 if (person) {
                     addDebt(person, product.paidBy, share);
                 }
@@ -80,7 +79,7 @@ export function useResults() {
         return persons;
     }
 
-    function consolidateDebts(persons: IPerson[]): IPerson[] {
+    function consolidateDebts(persons: IPerson[]): IPerson[] { // метод для вычета взаимных долгов
         persons.forEach((person) => {
             if (!person.debts) return;
 
@@ -97,13 +96,13 @@ export function useResults() {
                 );
                 if (reciprocalDebt) {
                     if (debt.amount > reciprocalDebt.amount) {
-                        // Если долг `person` больше, уменьшаем его и обнуляем встречный
+                        // Если долг должника больше, уменьшаем его и обнуляем встречный
                         debt.amount -= reciprocalDebt.amount;
                         creditor.debts = creditor.debts.filter(
                             (d) => d.personName !== person.name
                         );
                     } else if (debt.amount < reciprocalDebt.amount) {
-                        // Если долг `creditor` больше, уменьшаем его и обнуляем `debt`
+                        // Если долг оплатившего больше, уменьшаем его и обнуляем долг
                         reciprocalDebt.amount -= debt.amount;
                         person.debts = person.debts.filter(
                             (d) => d.personName !== creditor.name
@@ -124,7 +123,7 @@ export function useResults() {
         return persons;
     }
 
-    return {
+    return { //возвращаем из функции все необходимые для компонента данные
         debts,
         formVisible,
         showAndHide,

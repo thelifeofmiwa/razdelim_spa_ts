@@ -12,7 +12,7 @@ export function useProducts() {
     const productPrice = ref<string>(""); //реактивная переменная, связанная со вторым инпутом формы(цена продукта)
     let formVisible = ref<boolean>(false); //реактивная переменная, отвечающая за видимость формы добавления продуктов
 
-    const router = useRouter();
+    const router = useRouter(); // Переменная для работы с роутером
 
     function addNewProductAndClearInput() {
         //модифицируем метод хранилища addNewProduct
@@ -29,7 +29,7 @@ export function useProducts() {
                 selectedBy: [],
                 paidBy: "",
             };
-            store.addNewProduct(newProduct); // используем метоод хранилища
+            store.addNewProduct(newProduct); // используем метод хранилища
             productName.value = ""; //обнуляем значения в реактивных переменных
             productPrice.value = "";
             formVisible.value = false; //скрываем форму
@@ -58,7 +58,7 @@ export function useProducts() {
         return personsArray.map((person) => person.name);
     }
 
-    function goToNextPage() {
+    function goToNextPage() { // метод для работы с роутером 
         if (products.value.length > 0) {
             router.push({ path: "/result" });
         } else {

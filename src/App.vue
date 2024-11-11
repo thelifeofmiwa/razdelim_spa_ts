@@ -1,6 +1,6 @@
 <template>
     <div>
-        <router-view></router-view>
+        <router-view></router-view> <!-- Отображение страницы в соответствиие с данными роутера(переданным маршрутом)-->
     </div>
 </template>
 

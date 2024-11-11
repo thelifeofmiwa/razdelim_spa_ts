@@ -2,10 +2,13 @@
     <div id="persons__page">
         <h1>Персоны</h1>
         <h2>Нажмите на плюсик, чтобы добавить новую персону</h2>
-         <PersonList  :personsArray="persons" />
+        <PersonList :personsArray="persons" />
 
         <!--Импортируем форму для отображения персон из компонента PersonList и передаём через пропс массив persons-->
-        <ProjectButton class="button" @click="formVisible = true" v-if="formVisible === false"
+        <ProjectButton
+            class="button"
+            @click="formVisible = true"
+            v-if="formVisible === false"
             >+</ProjectButton
         >
         <!--Импортируем кнопку из компонента ProjectButton и с помощью директив v-on и v-if влияем на условия видимости формы и кнопки -->
@@ -16,7 +19,7 @@
                 label="Введите имя"
                 placeholder="Иван"
             ></ProjectInput>
-            <ProjectButton  @click="addPersonAndClearInput"
+            <ProjectButton @click="addPersonAndClearInput"
                 >Добавить</ProjectButton
             ><!--Так же импортируем кнопку и при клике добавляем новую персону в массив persons-->
         </div>
@@ -32,8 +35,13 @@ import ProjectButton from "@/components/UI/ProjectButton.vue";
 import ProjectInput from "@/components/UI/ProjectInput.vue";
 import PersonList from "@/components/PersonList.vue";
 
-const { persons, formVisible, newPersonName, addPersonAndClearInput, goToNextPage } =
-    usePersons(); //деструктуризируем объект, возвращаемый composable-функцией usePersons
+const {
+    persons,
+    formVisible,
+    newPersonName,
+    addPersonAndClearInput,
+    goToNextPage,
+} = usePersons(); //деструктуризируем данные, возвращаемые composable-функцией usePersons
 </script>
 
 <style scoped lang="scss">
