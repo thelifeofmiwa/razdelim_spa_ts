@@ -8,9 +8,12 @@
         <!--С помощью v-model связываем значение селекта и поля продукта paidBy; так же передаём в селект массив имён из массива products-->
         {{ product.name }} - {{ product.price }}
         <div class="payers" v-for="person in props.persons" :key="person.name">
-            <ProjectButton @click="selectProduct(person, product)">
+            <ProjectButton v-if="!person.selectedProducts.includes(product.name)" @click="selectProduct(person, product)">
                 <!--Используем метод selectProduct для записи имени продукта и покупателя в сооответствующие поля массивов-->
                 {{ person.name }}
+            </ProjectButton>
+            <ProjectButton v-if="person.selectedProducts.includes(product.name)" @click="selectProduct(person, product)">
+                {{ person.name }} <span>(Выбран)</span>
             </ProjectButton>
         </div>
     </div>
