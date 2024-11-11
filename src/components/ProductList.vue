@@ -33,9 +33,9 @@ const { arrayToString, selectProduct } = useProducts();
 <style scoped lang="scss">
 .products {
     margin-top: 10px;
-    padding: 10px;
-    border: 1px solid black;
-
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 3px;
     .payers {
         margin-top: 10px;
     }

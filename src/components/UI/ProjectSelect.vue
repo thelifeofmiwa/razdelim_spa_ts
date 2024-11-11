@@ -1,6 +1,7 @@
 <template>
     <v-select
-    variant="solo"
+    variant="underlined"
+    label="Кто оплатил продукт?"
     width="400"
     :items="props.itemsProp"
     >
