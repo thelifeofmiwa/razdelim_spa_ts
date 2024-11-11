@@ -1,33 +1,32 @@
-# smth
+## Приложение "Разделим!"
 
-This template should help get you started developing with Vue 3 in Vite.
+Удобный способ разделить счёт в кофейне или кафе.
 
-## Recommended IDE Setup
+Приложение реализует функционал сайта для разделения счёта в заведении. Пользователь передаёт имена персон и продукты, счёт за которые нужно разделить, и в конце получает точную сумму долга. Пользователь может разделить сразу несколько чеков.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+#Стек
 
-## Type Support for `.vue` Imports in TS
+1. Vue 3 (Composition API)
+2. Vue Router (маршрутизация)
+3. Pinia (State-менеджер)
+4. Typescript
+5. Vite (сборка приложения)
+6. Vuetify (UI-библиотека)
+7. SCSS (стилизация приложения)
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+#Интересные решения в проекте:
 
-## Customize configuration
+- Функционал приложения реализован в отдельных composable-функциях, что позволяет легко поддерживать и масштабировать приложение
+- Использование State-менеджера вместе с composable-функциями позволяет компонентам не хранить в себе данные и логику по работе с ними, а только отображать их
+- Часть контента страниц также была вынесена в отдельные компоненты, что позволяет легко масштабировать вёрстку
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+#Как запустить приложение? (Dev mode)
 
-## Project Setup
+Понадобится npm(стандартный пакетный менеджер NodeJS)
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+Сначала устанавливаем зависимости, после чего запускаем приложение на localhost:5173
