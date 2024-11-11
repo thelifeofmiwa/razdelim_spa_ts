@@ -1,11 +1,13 @@
 import type { IPerson, IProduct, IDebt } from "@/interfaces/interface";
 import usePersonsAndProductsStore from "@/stores/usePersonsAndProductsStore";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 export function useResults() {
     const store = usePersonsAndProductsStore();
     const persons = computed(() => store.persons);
     const products = computed(() => store.products);
+
+    const formVisible = ref<boolean>(false);
 
     const debts = computed(() =>
         consolidateDebts(
@@ -18,6 +20,14 @@ export function useResults() {
             }))
         )
     );
+
+    function showAndHide() {
+        if (formVisible.value) {
+            formVisible.value = false;
+        } else {
+            formVisible.value = true;
+        }
+    }
 
     function addDebt(
         person: IPerson,
@@ -108,5 +118,7 @@ export function useResults() {
 
     return {
         debts,
+        formVisible,
+        showAndHide
     };
 }
