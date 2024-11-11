@@ -4,8 +4,8 @@
         <div class="debt__list">
             <h2>Кто кому должен?</h2>
             <div v-for="person in debts" :key="person.count">
-                <div>
-                    {{ person.name }} должен ...
+                <div class="debt__names">
+                    <b>{{ person.name }}</b>  должен ...
                     <div v-if="person.debts.length > 0">
                         <div
                             v-for="debt in person.debts"
@@ -64,9 +64,12 @@ const { debts,formVisible, showAndHide, countAgain } = useResults();
         position: sticky;
     }
     .debt__list{
-        padding: 30px;
+        padding: 20px;
     }
 
+    .debt__names{
+        margin: 10px;
+    }
     .button{
         margin-top: 20px;
     }
