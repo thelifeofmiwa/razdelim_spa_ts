@@ -7,21 +7,26 @@ export function useProducts() {
     const persons = computed(() => store.persons); // инициализируем массивы persons и products из хранилища
     const products = computed(() => store.products);
 
-    const productName = ref<string>(""); //реактивная переменная, связанная с первым инпутом формы
-    const productPrice = ref<string>(""); //реактивная переменная, связанная со вторым инпутом формы
+    const productName = ref<string>(""); //реактивная переменная, связанная с первым инпутом формы(название продукта)
+    const productPrice = ref<string>(""); //реактивная переменная, связанная со вторым инпутом формы(цена продукта)
     let formVisible = ref<boolean>(false);//реактивная переменная, отвечающая за видимость формы добавления продуктов
 
     function addNewProductAndClearInput() { //модифицируем метод хранилища addNewProduct
-        const newProduct: IProduct = { // описываем переменную в соответствие с интерфейсом IProduct
-            name: productName.value,
-            price: Number(productPrice.value),
-            selectedBy: [],
-            paidBy: '',
-        };
-        store.addNewProduct(newProduct); // используем метоод хранилища
-        productName.value = ""; //обнуляем значения в реактивных переменных
-        productPrice.value = "";
-        formVisible.value = false; //скрываем форму
+        if(productName.value && Number(productPrice.value) !== 0 && !Number.isNaN(Number(productPrice.value))){ //проверяем корректное заполнение полей
+            const newProduct: IProduct = { // описываем переменную в соответствие с интерфейсом IProduct
+                name: productName.value,
+                price: Number(productPrice.value),
+                selectedBy: [],
+                paidBy: '',
+            };
+            store.addNewProduct(newProduct); // используем метоод хранилища
+            productName.value = ""; //обнуляем значения в реактивных переменных
+            productPrice.value = "";
+            formVisible.value = false; //скрываем форму
+        } else {
+            alert('Введите название продукта и его цену!')
+        }
+        
     }
 
     function selectProduct(person: IPerson, product: IProduct) { //создаём метод для изменения полей selectedProducts и selectedBy

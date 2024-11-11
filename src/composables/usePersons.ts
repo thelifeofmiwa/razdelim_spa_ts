@@ -10,15 +10,19 @@ export function usePersons() {
 	const newPersonName = ref<string>(''); //реактивная переменная, связанная с инпутом в форме
 
 	function addPersonAndClearInput() {  //модифицированный метод хранилица addNewPerson
-		const person: IPerson = {	//описываем переменную в соответствие с интерфейсом IPerson
-			name: newPersonName.value,
-			count: 0,
-			selectedProducts: [],
-			debts: []
-		};
-		store.addNewPerson(person); //используем метод хранилища
-		newPersonName.value = ""; //обнуляем значение реактивной переменной 
-		formVisible.value = false; //скрываем форму
+		if(newPersonName.value){ // проверка на пустую строку в инпуте newPersonName
+			const person: IPerson = {	//описываем переменную в соответствие с интерфейсом IPerson
+				name: newPersonName.value,
+				count: 0,
+				selectedProducts: [],
+				debts: []
+			};
+			store.addNewPerson(person); //используем метод хранилища
+			newPersonName.value = ""; //обнуляем значение реактивной переменной 
+			formVisible.value = false; //скрываем форму
+		} else {
+			alert('Введите имя персоны!')
+		}
 	}
 
 	return {	//возвращаем из функции все необходимые для компонента данные
